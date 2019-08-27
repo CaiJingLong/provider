@@ -183,7 +183,10 @@ ChangeNotifierProvider(
     /// scenario.
     var buildCount = 0;
     final setState = this.setState;
-    final listener = () => setState(() => buildCount++);
+
+    final listener = () {
+      if (state.mounted) setState(() => buildCount++);
+    };
 
     var capturedBuildCount = buildCount;
     // purposefully desynchronize buildCount and capturedBuildCount

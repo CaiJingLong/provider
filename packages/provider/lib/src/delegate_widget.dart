@@ -31,6 +31,12 @@ abstract class StateDelegate {
 
   StateSetter _setState;
 
+  State _state;
+
+
+  /// The [State] of delegate
+  State get state => _state;
+
   /// Notify the framework that the internal state of this object has changed.
   ///
   /// See the discussion on [State.setState] for more information.
@@ -125,13 +131,15 @@ class _DelegateWidgetState extends State<DelegateWidget> {
   void _mountDelegate() {
     widget.delegate
       .._context = context
-      .._setState = setState;
+      .._setState = setState
+      .._state = this;
   }
 
   void _unmountDelegate(StateDelegate delegate) {
     delegate
       .._context = null
-      .._setState = null;
+      .._setState = null
+      .._state = null;
   }
 
   @override
