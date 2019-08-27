@@ -185,7 +185,9 @@ ChangeNotifierProvider(
     final setState = this.setState;
 
     final listener = () {
-      if (state.mounted) setState(() => buildCount++);
+      if (state?.mounted == true) {
+        setState(() => buildCount++);
+      }
     };
 
     var capturedBuildCount = buildCount;
